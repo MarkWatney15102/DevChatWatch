@@ -1,0 +1,6 @@
+name: chatWatch
+version: 0.0.1
+autor: MarkWatney
+main: DevChatWatch.main
+commands:
+  chatWatch:
