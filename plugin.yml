@@ -4,3 +4,12 @@ autor: MarkWatney
 main: DevChatWatch.main
 commands:
   chatWatch:
+permissions:
+  DevChatWatch.addBadWord:
+    description: Gives access to /chatWatch addBadWord <badWord>
+  DevChatWatch.removeBadWord:
+    description: Gives access to /chatWatch removeBadWord <badWord>
+  DevChatWatch.mute:
+    description: Gives access to /chatWatch mute <username>
+  DevChatWatch.unmute:
+    description: Gives access to /chatWatch unmute <username>

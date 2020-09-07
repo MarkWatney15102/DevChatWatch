@@ -1,4 +1,4 @@
-package BadWord;
+package Mute;
 
 import java.io.File;
 import java.io.FileReader;
@@ -6,23 +6,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import DevChatWatch.DevChatWatchConfig;
 
-public class BadWords 
+public class Mute 
 {
-	public BadWords() 
+	public Mute()
 	{
-		this.tryToCreateBadWordFile();
+		this.tryToCreateMutedUserFile();
 	}
 	
-	private void tryToCreateBadWordFile()
+	private void tryToCreateMutedUserFile()
 	{
 		JSONObject json = new JSONObject();
 		
-		String path = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		String path = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
 		
 		try {
 			File file = new File(path);
@@ -38,14 +40,32 @@ public class BadWords
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void addBadWord(String badWord)
+	public void mutePlayer(String username)
 	{
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		Player player = Bukkit.getPlayer(username);
+		
+		String file = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
 		JSONParser parser = new JSONParser();
 		
 		try {
 			JSONObject json = (JSONObject) parser.parse(new FileReader(file));
-			json.put(badWord, badWord);
+			json.put(player.getName(), player.getName());
+			
+			this.updateJsonFile(json, file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void unMutePlayer(String username) 
+	{
+		String file = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
+		JSONParser parser = new JSONParser();
+		
+		try {
+			JSONObject json = (JSONObject) parser.parse(new FileReader(file));
+			json.remove(username);
 			
 			this.updateJsonFile(json, file);
 		} catch (Exception e) {
@@ -53,43 +73,29 @@ public class BadWords
 		}
 	}
 	
-	public void removeBadWord(String badWord) 
+	public ArrayList<Player> getMutePlayerList()
 	{
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		ArrayList<Player> player = new ArrayList<Player>();
+		
+		String file = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
 		JSONParser parser = new JSONParser();
 		
-		try {
-			JSONObject json = (JSONObject) parser.parse(new FileReader(file));
-			json.remove(badWord);
-			
-			this.updateJsonFile(json, file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public ArrayList<String> getBadWordsList()
-	{
-		ArrayList<String> badWords = new ArrayList<String>();
-		
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
-		JSONParser parser = new JSONParser();
 		try {
 			JSONObject json = (JSONObject) parser.parse(new FileReader(file));
 			
 			for (Object key : json.keySet()) {
 		        String keyStr = (String)key;
 		        Object keyvalue = json.get(keyStr);
+		        
+		        Player p = Bukkit.getPlayer((String)keyvalue);
 
-		        badWords.add((String) keyvalue);
+		        player.add(p);
 		    }
-			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return badWords;
+		return player;
 	}
 	
 	private void updateJsonFile(JSONObject json, String filePath)
