@@ -1,10 +1,12 @@
 name: chatWatch
-version: 0.0.1
+version: 1.0.0
 autor: MarkWatney
 main: DevChatWatch.main
 commands:
   chatWatch:
 permissions:
+  DevChatWatch.information:
+    description: Gives access to Plugin information
   DevChatWatch.addBadWord:
     description: Gives access to /chatWatch addBadWord <badWord>
   DevChatWatch.removeBadWord:

@@ -1,20 +1,19 @@
 package DevChatWatch;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class DevChatWatchHelper 
+public class Helper 
 {
 	private Player player;
 	
 	public void sendMessage(String message) 
 	{
-		this.player.sendMessage(ChatColor.DARK_RED + "[" + DevChatWatchConfig.PLUGIN_NAME + "] " + ChatColor.WHITE + message);
+		this.player.sendMessage(Config.PLUGIN_CHAT_PREFIX + message);
 	}
 	
 	public void print(String message)
 	{
-		System.out.println("[" + DevChatWatchConfig.PLUGIN_NAME + "] " + message);
+		System.out.println(Config.PLUGIN_CONSOLE_PREFIX + message);
 	}
 	
 	public Player getPlayer() 
