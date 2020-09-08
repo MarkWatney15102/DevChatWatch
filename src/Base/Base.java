@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.json.simple.JSONObject;
 
-import DevChatWatch.DevChatWatchConfig;
+import DevChatWatch.Config;
 
 public class Base 
 {
@@ -19,7 +19,7 @@ public class Base
 	private static void tryToCreatePluginFolder()
 	{
 		try {
-			new File("plugins/" + DevChatWatchConfig.PLUGIN_NAME).mkdirs();
+			new File("plugins/" + Config.PLUGIN_NAME).mkdirs();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +30,7 @@ public class Base
 	{
 		JSONObject json = new JSONObject();
 		
-		String path = DevChatWatchConfig.PLUGIN_PATH + "/config.json";
+		String path = Config.PLUGIN_PATH + "/config.json";
 		
 		try {
 			File file = new File(path);

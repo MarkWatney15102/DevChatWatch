@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import DevChatWatch.DevChatWatchConfig;
+import DevChatWatch.Config;
 
 public class Mute 
 {
@@ -24,7 +24,7 @@ public class Mute
 	{
 		JSONObject json = new JSONObject();
 		
-		String path = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
+		String path = Config.PLUGIN_PATH + "/muted.json";
 		
 		try {
 			File file = new File(path);
@@ -44,7 +44,7 @@ public class Mute
 	{
 		Player player = Bukkit.getPlayer(username);
 		
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
+		String file = Config.PLUGIN_PATH + "/muted.json";
 		JSONParser parser = new JSONParser();
 		
 		try {
@@ -60,7 +60,7 @@ public class Mute
 	
 	public void unMutePlayer(String username) 
 	{
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
+		String file = Config.PLUGIN_PATH + "/muted.json";
 		JSONParser parser = new JSONParser();
 		
 		try {
@@ -77,7 +77,7 @@ public class Mute
 	{
 		ArrayList<Player> player = new ArrayList<Player>();
 		
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/muted.json";
+		String file = Config.PLUGIN_PATH + "/muted.json";
 		JSONParser parser = new JSONParser();
 		
 		try {

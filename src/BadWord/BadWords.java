@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import DevChatWatch.DevChatWatchConfig;
+import DevChatWatch.Config;
 
 public class BadWords 
 {
@@ -22,7 +22,7 @@ public class BadWords
 	{
 		JSONObject json = new JSONObject();
 		
-		String path = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		String path = Config.PLUGIN_PATH + "/badWords.json";
 		
 		try {
 			File file = new File(path);
@@ -40,7 +40,7 @@ public class BadWords
 	@SuppressWarnings("unchecked")
 	public void addBadWord(String badWord)
 	{
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		String file = Config.PLUGIN_PATH + "/badWords.json";
 		JSONParser parser = new JSONParser();
 		
 		try {
@@ -55,7 +55,7 @@ public class BadWords
 	
 	public void removeBadWord(String badWord) 
 	{
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		String file = Config.PLUGIN_PATH + "/badWords.json";
 		JSONParser parser = new JSONParser();
 		
 		try {
@@ -73,7 +73,7 @@ public class BadWords
 	{
 		ArrayList<String> badWords = new ArrayList<String>();
 		
-		String file = DevChatWatchConfig.PLUGIN_PATH + "/badWords.json";
+		String file = Config.PLUGIN_PATH + "/badWords.json";
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject json = (JSONObject) parser.parse(new FileReader(file));
